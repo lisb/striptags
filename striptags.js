@@ -22,7 +22,7 @@
         WHITESPACE         = /\s/,
         ALLOWED_TAGS_REGEX = /<(\w*)>/g;
 
-    function striptags(html, allowableTags, tagReplacement) {
+    function striptags(html, allowableTags, tagReplacement, append_remain_data) {
         var html = html || '',
             state = STATE_OUTPUT,
             depth = 0,
@@ -233,6 +233,7 @@
             tagBuffer = '';
         }
 
+        if( append_remain_data !== undefined ) append_remain_data.data = context.tag_buffer;
         return output;
     }
 
