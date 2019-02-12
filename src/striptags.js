@@ -18,14 +18,16 @@
     const ALLOWED_TAGS_REGEX  = /<(\w*)>/g;
     const NORMALIZE_TAG_REGEX = /<\/?([^\s\/>]+)/;
 
-    function striptags(html, allowable_tags, tag_replacement) {
+    function striptags(html, allowable_tags, tag_replacement, append_remain_data) {
         html            = html || '';
         allowable_tags  = allowable_tags || [];
         tag_replacement = tag_replacement || '';
 
         let context = init_context(allowable_tags, tag_replacement);
 
-        return striptags_internal(html, context);
+        let result = striptags_internal(html, context);
+        if( append_remain_data !== undefined ) append_remain_data.data = context.tag_buffer;
+        return result;
     }
 
     function init_striptags_stream(allowable_tags, tag_replacement) {

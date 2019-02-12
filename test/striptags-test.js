@@ -112,11 +112,21 @@ describe('striptags', function() {
             assert.equal(striptags(html, allowed_tags), text);
         });
 
+        it('should strip extra < within tags 2', function() {
+            let html = 'a<b<c<d',
+                text = 'a<bcd',
+                allowed_tags = '';
+            let remain_data = { data:"" }
+            let result = striptags(html, allowed_tags, '', remain_data);
+            assert.equal(remain_data.data, "<bcd");
+            result += remain_data.data;
+            assert.equal(result, text);
+        });
+
         it('should strip <> within quotes', function() {
             let html = '<a href="<script>">lorem ipsum</a>',
                 text = '<a href="script">lorem ipsum</a>',
                 allowed_tags = '<a>';
-
             assert.equal(striptags(html, allowed_tags), text);
         });
     });
