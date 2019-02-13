@@ -233,7 +233,7 @@
             tagBuffer = '';
         }
 
-        if( append_remain_data !== undefined ) append_remain_data.data = context.tag_buffer;
+        if( append_remain_data !== undefined ) append_remain_data.data = tagBuffer;
         return output;
     }
 
